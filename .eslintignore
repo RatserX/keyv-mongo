@@ -1,0 +1,9 @@
+**/*.d.ts
+/built/local/**
+/lib/**
+/src/lib/*.generated.d.ts
+/src/public/
+/src/types/
+/tests/**
+dist/*
+coverage/*

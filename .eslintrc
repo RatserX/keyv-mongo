@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base/legacy",
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:prettier/recommended",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
+    "prettier",
+    "prettier/unicorn"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "eslint-comments",
+    "prettier",
+    "promise",
+    "unicorn"
+  ],
+  "rules": {
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"]
+  }
+}
