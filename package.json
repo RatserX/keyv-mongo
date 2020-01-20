@@ -24,7 +24,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-unicorn": "^15.0.1",
     "keyv": "^4.0.0",
+    "nyc": "^15.0.0",
     "prettier": "1.19.1",
+    "requirable": "^1.0.5",
     "this": "^1.1.0"
   },
   "scripts": {
@@ -35,17 +37,20 @@
     "build-sass": "node-sass src/**/*.scss dist/**/*.css",
     "build-ts": "tsc --listFiles --outDir dist --project tsconfig.eslint.json",
     "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "coverage": "nyc report --reporter=text-lcov",
     "debug": "npm run build && npm run watch-debug",
     "eslint": "eslint --fix --quiet \"**/*.{js,ts,tsx}\"",
     "serve-debug": "nodemon --inspect dist/app.js",
     "start": "node server.js",
     "start-node": "node dist/app.js",
-    "test-node": "ava",
+    "test-ava": "nyc ava",
+    "test-generic": "node test/test.generic.js",
     "tslint": "tslint --config tslint.json --project tsconfig.json",
     "watch": "concurrently --kill-others --names \"TypeScript,Node\" --prefix \"[{name}]\" --prefix-colors \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-debug": "concurrently --kill-others --names \"TypeScript,Node\" --prefix \"[{name}]\" --prefix-colors \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "watch-node": "nodemon dist/app.js",
     "watch-test": "npm run test -- --watchAll",
+    "watch-test-node": "nyc ava --watch",
     "watch-ts": "tsc --project tsconfig.eslint.json --watch",
     "watch-sass": "node-sass -watch src/**/*.scss dist/**/*.css"
   },
@@ -60,8 +65,12 @@
   },
   "homepage": "https://github.com/RatserX/keyv-mongodb#readme",
   "ava": {
+    "files": [
+      "test/*.ava.*"
+    ],
     "require": [
-      "esm"
-		]
-	}
+      "esm",
+      "requirable"
+    ]
+  }
 }
