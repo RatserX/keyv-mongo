@@ -1,95 +1,145 @@
 /* eslint no-param-reassign: 0 */
 
-import EventEmitter from "events";
-import mongodb from "mongodb";
-import pify from "pify";
+const EventEmitter = require("events");
+const MongoDB = require("mongodb");
 
 class KeyvMongoDatabase extends EventEmitter {
-  constructor(url, options) {
+  constructor(uri, options) {
     super();
 
-    this.ttlSupport = false;
-    url = url || {};
+    this.init(uri, options);
+  }
 
-    if (typeof url === "string") {
-      url = { url };
-    }
-
-    if (url.uri) {
-      url = { url: url.uri, ...url };
-    }
-
-    this.options = {
-      url: "mongodb://127.0.0.1:27017",
-      collection: "keyv",
-      ...url,
+  async init(uri, options) {
+    this.opts = {
+      collectionName: "keyv",
+      mongoClientCommonOptions: false,
+      mongoClientOptions: false,
       ...options
     };
 
-    const client = new mongodb.MongoClient(
-      this.options.url,
-      this.options.mongoClientOptions
-    );
-    this.db = client;
-
-    const collection = this.db.collection(this.options.collection);
-
-    collection.createIndex(
-      { key: 1 },
-      {
-        unique: true,
-        background: true
-      }
-    );
-    collection.createIndex(
-      { expiresAt: 1 },
-      {
-        expireAfterSeconds: 0,
-        background: true
-      }
+    const mongoClient = await MongoDB.MongoClient
+    .connect(
+      uri,
+      this.opts.mongoClientOptions
+    )
+    .catch(error => {
+      this.emit("error", error);
+    });
+    
+    const mongoDatabase = mongoClient.db(
+      this.opts.dbName,
+      this.opts.mongoClientCommonOptions
     );
 
-    this.mongo = ["update", "findOne", "remove"].reduce((object, method) => {
-      object[method] = pify(collection[method].bind(collection));
+    const mongoCollection = mongoDatabase.collection(
+      this.opts.collectionName,
+      function(error, collection) {
+        if (error) {
+          this.emit("error", error);
+        }
 
-      return object;
-    }, {});
+        collection.createIndex(
+          {
+            key: 1
+          },
+          {
+            background: true,
+            unique: true
+          }
+        );
 
-    this.db.on("error", error => this.emit("error", error));
-  }
-
-  get(key) {
-    return this.mongo.findOne({ key }).then(document_ => {
-      if (document_ === null) {
-        return undefined;
+        collection.createIndex(
+          {
+            expiresAt: 1
+          },
+          {
+            background: true,
+            expireAfterSeconds: 0
+          }
+        );
       }
-      return document_.value;
+    );
+    
+    this.collection = ["findOne", "remove", "update"].reduce(
+      (previousValue, currentValue, currentIndex, array) => {
+        console.log("previousValue ");
+        console.log(previousValue);
+        console.log("---");
+        console.log("currentValue " + currentValue);
+        console.log("---");
+        console.log("currentIndex " + currentIndex);
+        console.log("---");
+        console.log("array " + array);
+        console.log("---");
+        console.log("mongoCollection[currentValue] ");
+        console.log(mongoCollection[currentValue]);
+        console.log("---");
+        console.log("\n\n");
+
+        previousValue[currentValue] = mongoCollection[currentValue].bind(
+          mongoCollection
+        );
+
+        return previousValue;
+      },
+      {}
+    );
+
+    console.log("mongoCollection");
+    console.log(mongoCollection.findOne);
+    console.log("this.collection");
+    console.log(this.collection);
+    console.log("---");
+
+    mongoDatabase.on("error", (...arguments_) => {
+      this.emit("error", ...arguments_);
     });
   }
 
-  set(key, value, ttl) {
-    const expiresAt =
-      typeof ttl === "number" ? new Date(Date.now() + ttl) : null;
+  async clear() {
+    console.log("this.collection");
+    console.log(this.collection);
 
-    return this.mongo.update(
-      { key },
-      { key, value, expiresAt },
-      { upsert: true }
-    );
+    return this.collection.remove({ key: new RegExp(`^${this.namespace}:`) });
   }
 
-  delete(key) {
-    if (typeof key !== "string") {
-      return Promise.resolve(false);
+  async delete(key) {
+    console.log("this.collection");
+    console.log(this.collection);
+
+    return this.collection.remove({ key });
+  }
+
+  async get(key, options) {
+    console.log("this.collection");
+    console.log(this.collection);
+
+    return this.collection.findOne({ key }, options, (error, result) => {
+      if (error) {
+        this.emit("error", error);
+      }
+
+      return result;
+    });
+  }
+
+  async set(key, value, ttl) {
+    console.log("this.collection");
+    console.log(this.collection);
+
+    if (typeof ttl === "undefined") {
+      ttl = this.opts.ttl;
     }
-    return this.mongo.remove({ key }).then(object => object.n > 0);
-  }
 
-  clear() {
-    return this.mongo
-      .remove({ key: new RegExp(`^${this.namespace}:`) })
-      .then(() => undefined);
+    if (ttl === 0) {
+      ttl = undefined;
+    }
+
+    const expiresAt = typeof ttl === "number" ? Date.now() + ttl : null;
+
+    return this.collection.update({ key }, { key, value, expiresAt }, { upsert: true });
   }
 }
 
-export default KeyvMongoDatabase;
+module.exports = KeyvMongoDatabase;
