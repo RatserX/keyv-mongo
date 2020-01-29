@@ -1,0 +1,35 @@
+const delay = require('delay');
+const Keyv = require("keyv");
+const KeyvMongoDatabase = require("this");
+const MongoDbHelper = require("../../helpers/mongodb.helper");
+const test = require("ava");
+const timekeeper = require('timekeeper');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+const mongoDatabaseUri = MongoDbHelper.getUri();
+const options = {
+    collection: "keyv"
+};
+const store = () => new KeyvMongoDatabase(mongoDatabaseUri, options);
+
+test.serial('namespaced clear only clears current namespace', (() => {
+    var _ref4 = _asyncToGenerator(function* (t) {
+        const keyv1 = new Keyv({ store: store(), namespace: 'keyv1' });
+        const keyv2 = new Keyv({ store: store(), namespace: 'keyv2' });
+        yield keyv1.set('foo', 'keyv1');
+        yield keyv1.set('bar', 'keyv1');
+        yield keyv2.set('foo', 'keyv2');
+        yield keyv2.set('bar', 'keyv2');
+        yield keyv1.clear();
+        t.is((yield keyv1.get('foo')), undefined);
+        t.is((yield keyv1.get('bar')), undefined);
+        t.is((yield keyv2.get('foo')), 'keyv2');
+        t.is((yield keyv2.get('bar')), 'keyv2');
+    });
+
+    return function (_x3) {
+        return _ref4.apply(this, arguments);
+    };
+})());
