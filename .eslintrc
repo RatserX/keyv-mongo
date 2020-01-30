@@ -1,6 +1,7 @@
 {
   "env": {
     "browser": true,
+    "es6": true,
     "node": true
   },
   "extends": [
@@ -32,8 +33,9 @@
     "unicorn"
   ],
   "rules": {
-    "promise/catch-or-return": 0,
     "no-param-reassign": 0,
+    "no-shadow": 0,
+    "promise/catch-or-return": 0,
     "quotes": ["error", "double"],
     "semi": ["error", "always"]
   }
