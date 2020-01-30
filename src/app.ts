@@ -1,13 +1,13 @@
 import { EventEmitter } from "events";
 import {
   Collection,
+  Db,
   DbCollectionOptions,
+  DeleteWriteOpResultObject,
   MongoClient,
   MongoClientCommonOption,
   MongoClientOptions,
-  MongoError,
-  DeleteWriteOpResultObject,
-  Db
+  UpdateWriteOpResult
 } from "mongodb";
 import thunkyp from "thunky/promise";
 
@@ -21,11 +21,11 @@ interface KeyvMongoDatabaseOptions {
 }
 
 class KeyvMongoDatabase extends EventEmitter {
+  collectionThunk: any;
+
   namespace: string;
 
   options: KeyvMongoDatabaseOptions;
-
-  thunk: any;
 
   constructor(uri: string, options: KeyvMongoDatabaseOptions) {
     super();
@@ -40,8 +40,8 @@ class KeyvMongoDatabase extends EventEmitter {
       } as MongoClientOptions,
       ...options
     };
-    
-    this.thunk = thunkyp(async () => {
+
+    this.collectionThunk = thunkyp(async () => {
       const mongoClient: MongoClient = await MongoClient.connect(
         uri,
         this.options.mongoClientOptions
@@ -71,45 +71,50 @@ class KeyvMongoDatabase extends EventEmitter {
   }
 
   async clear() {
-    const collection: Collection<any> = await this.thunk();
+    const collection: Collection<any> = await this.collectionThunk();
+    const promise: Promise<DeleteWriteOpResultObject> = collection
+      .deleteMany({
+        key: new RegExp(`^${this.namespace}:`)
+      })
+      .then(() => undefined);
 
-    await collection.deleteMany({
-      key: new RegExp(`^${this.namespace}:`)
-    });
-
-    return Promise.resolve(undefined);
+    return promise;
   }
 
   async delete(key: any) {
-    const collection: Collection<any> = await this.thunk();
-    const result: DeleteWriteOpResultObject = await collection.deleteMany({
-      key
-    });
+    const collection: Collection<any> = await this.collectionThunk();
+    const promise: Promise<boolean> = collection
+      .deleteMany({
+        key
+      })
+      .then((value: DeleteWriteOpResultObject) => value.result.n > 0);
 
-    return Promise.resolve(result.result.n > 0);
+    return promise;
   }
 
   async get(key: any) {
-    const collection: Collection<any> = await this.thunk();
-    const result: any = await collection.findOne({ key });
+    const collection: Collection<any> = await this.collectionThunk();
+    const promise: Promise<any> = await collection
+      .findOne({ key })
+      .then((value: any) => {
+        if (value === null) {
+          return undefined;
+        }
 
-    if (result === null) {
-      return Promise.resolve(undefined);
-    }
+        return value.value;
+      });
 
-    return Promise.resolve(result.value);
+    return promise;
   }
 
   async set(key: any, value: any, ttl: number) {
     const expiresAt = typeof ttl === "number" ? Date.now() + ttl : null;
-    const collection: Collection<any> = await this.thunk();
-    const result: any = await collection.updateOne(
-      { key },
-      { $set: { key, value, expiresAt } },
-      { upsert: true }
-    );
+    const collection: Collection<any> = await this.collectionThunk();
+    const promise: Promise<UpdateWriteOpResult> = collection
+      .updateOne({ key }, { $set: { key, value, expiresAt } }, { upsert: true })
+      .then((value: UpdateWriteOpResult) => value);
 
-    return Promise.resolve(result);
+    return promise;
   }
 }
 

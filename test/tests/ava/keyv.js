@@ -10,7 +10,7 @@ const options = {
 };
 const store = () => new KeyvMongoDatabase(mongoDatabaseUri, options);
 
-//KeyvTestSuite.keyvApiTests(test, Keyv, store);
-//KeyvTestSuite.keyvNamepsaceTests(test, Keyv, store);
-KeyvTestSuite.keyvOfficialTests(test, Keyv, mongoDatabaseUri, "mongodb://127.0.0.1:27017");
-//KeyvTestSuite.keyvValueTests(test, Keyv, store);
+KeyvTestSuite.keyvApiTests(test, Keyv, store);
+KeyvTestSuite.keyvNamepsaceTests(test, Keyv, store);
+//KeyvTestSuite.keyvOfficialTests(test, Keyv, mongoDatabaseUri, "mongodb://127.0.0.1:27017");
+KeyvTestSuite.keyvValueTests(test, Keyv, store);
