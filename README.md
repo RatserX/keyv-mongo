@@ -1,6 +1,8 @@
-# @keyv/mongo [<img width="100" align="right" src="https://rawgit.com/lukechilds/keyv/master/media/logo.svg" alt="keyv">](https://github.com/lukechilds/keyv)
+# @keyv/mongodb [<img width="100" align="right" src="https://rawgit.com/lukechilds/keyv/master/media/logo.svg" alt="keyv">](https://github.com/lukechilds/keyv)
 
 > Pure MongoDB storage adapter for Keyv
+
+[![Build Status](https://travis-ci.com/RatserX/keyv-mongodb.svg?token=Az56pmx34zmn4Ap6pZAz&branch=master)](https://travis-ci.com/RatserX/keyv-mongodb)
 
 MongoDB storage adapter for [Keyv](https://github.com/lukechilds/keyv).
 
@@ -23,4 +25,4 @@ keyv.on('error', handleConnectionError);
 
 ## License
 
-MIT © Miguel Gonzales
+MIT © RatserX
