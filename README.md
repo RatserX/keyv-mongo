@@ -1,10 +1,10 @@
 # @keyv/mongodb [<img width="100" align="right" src="https://rawgit.com/lukechilds/keyv/master/media/logo.svg" alt="keyv">](https://github.com/lukechilds/keyv)
 
-> Pure MongoDB storage adapter for Keyv
+> Yet another MongoDB storage adapter for Keyv
 
 [![Build Status](https://travis-ci.com/RatserX/keyv-mongodb.svg?token=Az56pmx34zmn4Ap6pZAz&branch=master)](https://travis-ci.com/RatserX/keyv-mongodb)
 
-MongoDB storage adapter for [Keyv](https://github.com/lukechilds/keyv).
+MongoDB storage adapter for [Keyv](https://github.com/lukechilds/keyv). Uses the original MongoDB Node.js Driver instead of MongoJS.
 
 Uses TTL indexes to automatically remove expired documents. However [MongoDB doesn't guarantee data will be deleted immediately upon expiration](https://docs.mongodb.com/manual/core/index-ttl/#timing-of-the-delete-operation), so expiry dates are revalidated in Keyv.
 
