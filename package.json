@@ -1,7 +1,7 @@
 {
-  "name": "keyv-mongodb",
+  "name": "@keyv/mongodb",
   "version": "1.0.0",
-  "description": "",
+  "description": "MongoDB storage adapter for Keyv",
   "main": "dist/app.js",
   "directories": {
     "test": "test"
@@ -62,8 +62,8 @@
     "type": "git",
     "url": "git+https://github.com/RatserX/keyv-mongodb.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "RatserX <12604047+RatserX@users.noreply.github.com> (http://ratserx.github.io/)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/RatserX/keyv-mongodb/issues"
   },
@@ -72,5 +72,17 @@
     "files": [
       "test/tests/ava/**"
     ]
-  }
+  },
+  "keywords": [
+    "adapter",
+    "cache",
+    "key",
+    "keyv",
+    "mongo",
+    "mongodb",
+    "storage",
+    "store",
+    "ttl",
+    "value"
+  ]
 }
