@@ -3,6 +3,7 @@
 > Yet another MongoDB storage adapter for Keyv
 
 [![Build Status](https://travis-ci.com/RatserX/keyv-mongodb.svg?token=Az56pmx34zmn4Ap6pZAz&branch=master)](https://travis-ci.com/RatserX/keyv-mongodb)
+[![Coverage Status](https://coveralls.io/repos/github/RatserX/keyv-mongodb/badge.svg?branch=master)](https://coveralls.io/github/RatserX/keyv-mongodb?branch=master)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg)](https://www.buymeacoffee.com/Ratser)
 
