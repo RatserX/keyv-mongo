@@ -71,11 +71,6 @@
     "url": "https://github.com/RatserX/keyv-mongodb/issues"
   },
   "homepage": "https://github.com/RatserX/keyv-mongodb#readme",
-  "ava": {
-    "files": [
-      "test/tests/ava/**"
-    ]
-  },
   "keywords": [
     "adapter",
     "cache",
@@ -87,5 +82,10 @@
     "store",
     "ttl",
     "value"
-  ]
+  ],
+  "ava": {
+    "files": [
+      "test/tests/ava/**"
+    ]
+  }
 }

@@ -7,8 +7,7 @@
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg)](https://www.buymeacoffee.com/Ratser)
 
-MongoDB storage adapter for [Keyv](https://github.com/lukechilds/keyv).
-This adapter uses the original MongoDB Node.js Driver instead of any third-party library.
+MongoDB storage adapter for [Keyv](https://github.com/lukechilds/keyv). This adapter uses the original MongoDB Node.js Driver instead of any third-party library.
 
 Uses TTL indexes to automatically remove expired documents. However [MongoDB doesn't guarantee data will be deleted immediately upon expiration](https://docs.mongodb.com/manual/core/index-ttl/#timing-of-the-delete-operation), so expiry dates are revalidated in Keyv.
 
