@@ -42,6 +42,8 @@
     "coverage": "nyc report --reporter=text-lcov",
     "debug": "npm run build && npm run watch-debug",
     "lint": "tsc --noEmit && eslint --fix --quiet \"**/*.{ts,tsx}\"",
+    "prepack" : "npm run build",
+    "prepublishOnly" : "npm test",
     "serve": "node dist/app.js",
     "serve-debug": "nodemon --inspect dist/app.js",
     "start": "npm run serve",

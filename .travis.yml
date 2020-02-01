@@ -8,7 +8,7 @@ node_js:
 notifications:
   email: false
 script:
-  - npm run build-all
-  - npm run test-ava
+  - npm run build
+  - npm run test
 services:
   - mongodb
