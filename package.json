@@ -1,7 +1,7 @@
 {
   "name": "@keyv/mongodb",
   "version": "1.0.0",
-  "description": "MongoDB storage adapter for Keyv",
+  "description": "MongoDB storage adapter for Keyv (MongoDB Node.js driver)",
   "main": "dist/app.js",
   "directories": {
     "tests": "tests"

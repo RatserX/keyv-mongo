@@ -12,7 +12,6 @@ jobs:
 language: node_js
 node_js:
   - node
-  - 13
 notifications:
   email: false
 script:
