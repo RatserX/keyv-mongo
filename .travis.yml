@@ -5,16 +5,15 @@ jobs:
     - stage: release
       deploy:
         on:
-          branch:
-            - master
+          all_branches: true
         provider: script
         script:
           - npx semantic-release
-        skip_cleanup: true
       node_js: lts/*
 language: node_js
 node_js:
   - node
+  - lts/*
 notifications:
   email: false
 script:
