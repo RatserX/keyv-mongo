@@ -74,6 +74,9 @@
     "url": "https://github.com/RatserX/keyv-mongodb/issues"
   },
   "homepage": "https://github.com/RatserX/keyv-mongodb#readme",
+  "files": [
+    "dist/**"
+  ],
   "keywords": [
     "adapter",
     "cache",
