@@ -1,8 +1,8 @@
-const dotenv = require("dotenv");
+import { config } from "dotenv"
 
 class MongoDbHelper {
-    static getUri = () => {
-        dotenv.config({
+    public static getUri = () => {
+        config({
             debug: process.env.DOTENV_DEBUG === "true",
             path: `${process.cwd()}/.env`
         });
@@ -36,4 +36,4 @@ class MongoDbHelper {
     }
 }
 
-module.exports = MongoDbHelper;
+export { MongoDbHelper as default };

@@ -4,7 +4,7 @@
   "description": "MongoDB storage adapter for Keyv",
   "main": "dist/app.js",
   "directories": {
-    "test": "test"
+    "tests": "tests"
   },
   "dependencies": {
     "@types/eslint": "^6.1.7",
@@ -15,6 +15,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@ava/typescript": "^1.0.0",
     "@keyv/test-suite": "^1.6.11",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.17.0",
@@ -33,15 +34,18 @@
     "keyv": "^4.0.0",
     "nyc": "^15.0.0",
     "prettier": "1.19.1",
-    "this": "^1.1.0"
+    "semantic-release": "^17.0.2",
+    "this": "^1.1.0",
+    "ts-node": "^8.6.2"
   },
   "scripts": {
     "build": "npm run lint && npm run build-ts",
     "build-sass": "node-sass src/**/*.scss dist/**/*.css",
-    "build-ts": "tsc --listFiles --outDir dist --project tsconfig.eslint.json",
+    "build-ts": "tsc --project tsconfig.eslint.json",
     "copy-static-assets": "ts-node copyStaticAssets.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "debug": "npm run build && npm run watch-debug",
+    "declaration": "tsc --declaration --declarationDir src/types --declarationMap --emitDeclarationOnly --project tsconfig.eslint.json",
     "lint": "tsc --noEmit && eslint --fix --quiet \"**/*.{ts,tsx}\"",
     "prepack": "npm run build",
     "prepublishOnly": "npm test",
@@ -51,7 +55,6 @@
     "start-node": "node dist/app.js",
     "test": "npm run test-ava",
     "test-ava": "nyc ava --serial --verbose",
-    "test-generic": "node test/tests/generic/*.js",
     "tslint": "tslint --config tslint.json --project tsconfig.json",
     "watch": "concurrently --kill-others --names \"TypeScript,Node\" --prefix \"[{name}]\" --prefix-colors \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-ava": "nyc ava --serial --verbose --watch",
@@ -59,7 +62,7 @@
     "watch-node": "nodemon dist/app.js",
     "watch-sass": "node-sass -watch src/**/*.scss dist/**/*.css",
     "watch-test": "npm run test -- --watchAll",
-    "watch-ts": "tsc --listFiles --outDir dist --project tsconfig.eslint.json --watch"
+    "watch-ts": "tsc --project tsconfig.eslint.json --watch"
   },
   "repository": {
     "type": "git",
@@ -83,9 +86,5 @@
     "ttl",
     "value"
   ],
-  "ava": {
-    "files": [
-      "test/tests/ava/**"
-    ]
-  }
+  "types": "src/types/*"
 }

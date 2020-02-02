@@ -4,6 +4,8 @@
 
 [![Build Status](https://travis-ci.com/RatserX/keyv-mongodb.svg?token=Az56pmx34zmn4Ap6pZAz&branch=master)](https://travis-ci.com/RatserX/keyv-mongodb)
 [![Coverage Status](https://coveralls.io/repos/github/RatserX/keyv-mongodb/badge.svg?branch=master)](https://coveralls.io/github/RatserX/keyv-mongodb?branch=master)
+[![Dependencies Status](https://david-dm.org/RatserX/keyv-mongodb.svg?branch=master)](https://david-dm.org/RatserX/keyv-mongodb)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg)](https://www.buymeacoffee.com/Ratser)
 
@@ -14,7 +16,7 @@ Uses TTL indexes to automatically remove expired documents. However [MongoDB doe
 ## Install
 
 ```shell
-npm install --save keyv
+npm install --save keyv @keyv/mongodb
 ```
 
 ## Usage

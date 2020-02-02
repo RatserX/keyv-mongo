@@ -12,12 +12,12 @@ import {
 import thunkyp from "thunky/promise";
 
 interface KeyvMongoDatabaseOptions {
-  collection: string;
+  collection?: string;
   dbName?: string;
-  ttl: number;
-  dbCollectionOptions: DbCollectionOptions;
-  mongoClientCommonOption: MongoClientCommonOption;
-  mongoClientOptions: MongoClientOptions;
+  ttl?: number;
+  dbCollectionOptions?: DbCollectionOptions;
+  mongoClientCommonOption?: MongoClientCommonOption;
+  mongoClientOptions?: MongoClientOptions;
 }
 
 class KeyvMongoDatabase extends EventEmitter {
@@ -70,7 +70,7 @@ class KeyvMongoDatabase extends EventEmitter {
     });
   }
 
-  async clear() {
+  clear = async (): Promise<DeleteWriteOpResultObject> => {
     const collection: Collection<any> = await this.collectionThunk();
     const promise: Promise<DeleteWriteOpResultObject> = collection
       .deleteMany({
@@ -79,9 +79,9 @@ class KeyvMongoDatabase extends EventEmitter {
       .then(() => undefined);
 
     return promise;
-  }
+  };
 
-  async delete(key: any) {
+  delete = async (key: any): Promise<boolean> => {
     const collection: Collection<any> = await this.collectionThunk();
     const promise: Promise<boolean> = collection
       .deleteMany({
@@ -90,9 +90,9 @@ class KeyvMongoDatabase extends EventEmitter {
       .then((value: DeleteWriteOpResultObject) => value.result.n > 0);
 
     return promise;
-  }
+  };
 
-  async get(key: any) {
+  get = async (key: any): Promise<any> => {
     const collection: Collection<any> = await this.collectionThunk();
     const promise: Promise<any> = await collection
       .findOne({ key })
@@ -105,9 +105,13 @@ class KeyvMongoDatabase extends EventEmitter {
       });
 
     return promise;
-  }
+  };
 
-  async set(key: any, value: any, ttl: number) {
+  set = async (
+    key: any,
+    value: any,
+    ttl: number
+  ): Promise<UpdateWriteOpResult> => {
     const expiresAt = typeof ttl === "number" ? Date.now() + ttl : null;
     const collection: Collection<any> = await this.collectionThunk();
     const promise: Promise<UpdateWriteOpResult> = collection
@@ -115,7 +119,7 @@ class KeyvMongoDatabase extends EventEmitter {
       .then((value: UpdateWriteOpResult) => value);
 
     return promise;
-  }
+  };
 }
 
-module.exports = KeyvMongoDatabase;
+export { KeyvMongoDatabase as default };

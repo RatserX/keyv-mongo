@@ -3,9 +3,19 @@ after_success:
 cache:
   directories:
     - node_modules
+jobs:
+  include:
+    - stage: release
+      deploy:
+        provider: script
+        script:
+          - npx semantic-release
+        skip_cleanup: true
+      node_js: lts/*
 language: node_js
 node_js:
   - node
+  - lts/*
   - 13
 notifications:
   email: false
