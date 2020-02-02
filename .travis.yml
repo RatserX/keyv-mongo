@@ -4,6 +4,9 @@ jobs:
   include:
     - stage: release
       deploy:
+        on:
+          branch:
+            - master
         provider: script
         script:
           - npx semantic-release
