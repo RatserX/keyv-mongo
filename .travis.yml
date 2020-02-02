@@ -9,6 +9,7 @@ jobs:
         provider: script
         script:
           - npx semantic-release
+        skip_cleanup: true
       node_js: lts/*
 language: node_js
 node_js:
