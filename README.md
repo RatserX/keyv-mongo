@@ -24,7 +24,7 @@ npm install --save keyv @keyv/mongodb
 ```js
 const Keyv = require('keyv');
 
-const keyv = new Keyv({ store: new KeyvMongoDatabase('mongodb://user:pass@localhost:27017/dbname') });
+const keyv = new Keyv({ store: new KeyvMongoDb('mongodb://user:pass@localhost:27017/dbname') });
 keyv.on('error', handleConnectionError);
 ```
 

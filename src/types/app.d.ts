@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
 import { DbCollectionOptions, DeleteWriteOpResultObject, MongoClientCommonOption, MongoClientOptions, UpdateWriteOpResult } from "mongodb";
-interface KeyvMongoDatabaseOptions {
+interface KeyvMongoDbOptions {
     collection?: string;
     dbName?: string;
     ttl?: number;
@@ -9,15 +9,15 @@ interface KeyvMongoDatabaseOptions {
     mongoClientCommonOption?: MongoClientCommonOption;
     mongoClientOptions?: MongoClientOptions;
 }
-declare class KeyvMongoDatabase extends EventEmitter {
+declare class KeyvMongoDb extends EventEmitter {
     collectionThunk: any;
     namespace: string;
-    options: KeyvMongoDatabaseOptions;
-    constructor(uri: string, options: KeyvMongoDatabaseOptions);
+    options: KeyvMongoDbOptions;
+    constructor(uri: string, options: KeyvMongoDbOptions);
     clear: () => Promise<DeleteWriteOpResultObject>;
     delete: (key: any) => Promise<boolean>;
     get: (key: any) => Promise<any>;
     set: (key: any, value: any, ttl: number) => Promise<UpdateWriteOpResult>;
 }
-export { KeyvMongoDatabase as default };
+export { KeyvMongoDb as default };
 //# sourceMappingURL=app.d.ts.map

@@ -36,6 +36,7 @@
     "no-param-reassign": 0,
     "no-shadow": 0,
     "promise/catch-or-return": 0,
+    "unicorn/prevent-abbreviations": 0,
     "quotes": ["error", "double"],
     "semi": ["error", "always"]
   }

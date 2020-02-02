@@ -1,11 +1,11 @@
 import Keyv from "keyv";
-import KeyvMongoDatabase from "this"
+import KeyvMongoDb from "this"
 import { keyvApiTests, keyvNamepsaceTests, keyvValueTests } from "@keyv/test-suite"
 import MongoDbHelper from "./helpers/mongodb.helper"
 import test from "ava"
 
 const mongoDatabaseUri = MongoDbHelper.getUri();
-const store = () => new KeyvMongoDatabase(mongoDatabaseUri, {
+const store = () => new KeyvMongoDb(mongoDatabaseUri, {
   collection: "keyv"
 });
 
