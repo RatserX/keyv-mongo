@@ -6,16 +6,15 @@ cache:
 jobs:
   include:
     - stage: release
+      node_js: lts/*
       deploy:
         provider: script
         skip_cleanup: true
         script:
           - npx semantic-release
-      node_js: lts/*
 language: node_js
 node_js:
   - node
-  - lts/*
   - 13
 notifications:
   email: false
