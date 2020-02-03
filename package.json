@@ -15,7 +15,7 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "@ava/typescript": "^1.0.0",
+    "@ava/typescript": "^1.1.0",
     "@keyv/test-suite": "^1.6.11",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.17.0",
