@@ -1,7 +1,7 @@
 {
-  "name": "@keyv/mongodb",
+  "name": "keyv-mongo",
   "version": "1.0.0",
-  "description": "MongoDB storage adapter for Keyv",
+  "description": "MongoDB storage adapter for Keyv (MongoDB Node.js driver)",
   "main": "dist/app.js",
   "directories": {
     "tests": "tests"
@@ -15,11 +15,11 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
-    "@ava/typescript": "^1.0.0",
+    "@ava/typescript": "^1.1.0",
     "@keyv/test-suite": "^1.6.11",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.17.0",
-    "ava": "^3.1.0",
+    "ava": "^3.2.0",
     "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -27,10 +27,10 @@
     "eslint-config-airbnb-typescript-prettier": "^1.4.2",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
-    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-unicorn": "^15.0.1",
+    "eslint-plugin-unicorn": "^16.0.0",
     "keyv": "^4.0.0",
     "nyc": "^15.0.0",
     "prettier": "1.19.1",
@@ -66,14 +66,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RatserX/keyv-mongodb.git"
+    "url": "git+https://github.com/RatserX/keyv-mongo.git"
   },
   "author": "RatserX <12604047+RatserX@users.noreply.github.com> (http://ratserx.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RatserX/keyv-mongodb/issues"
+    "url": "https://github.com/RatserX/keyv-mongo/issues"
   },
-  "homepage": "https://github.com/RatserX/keyv-mongodb#readme",
+  "homepage": "https://github.com/RatserX/keyv-mongo#readme",
+  "files": [
+    "dist/**"
+  ],
   "keywords": [
     "adapter",
     "cache",

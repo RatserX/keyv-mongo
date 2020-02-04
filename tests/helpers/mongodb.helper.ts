@@ -11,28 +11,28 @@ class MongoDbHelper {
         const password = process.env.MONGODB_URI_PASSWORD;
         const server = process.env.MONGODB_URI_SERVER;
 
-        let mongoDatabaseUri = process.env.MONGODB_URI_PROTOCOL;
-        mongoDatabaseUri += `://`;
+        let mongoDbUri = process.env.MONGODB_URI_PROTOCOL;
+        mongoDbUri += `://`;
 
         if (userName) {
-            mongoDatabaseUri += `${userName}`;
+            mongoDbUri += `${userName}`;
             
             if (password) {
-                mongoDatabaseUri += `:${password}`;
+                mongoDbUri += `:${password}`;
             }
             
-            mongoDatabaseUri += `@`;
+            mongoDbUri += `@`;
         }
 
         if (server) {
-            mongoDatabaseUri += server;
-            mongoDatabaseUri += `:${process.env.MONGODB_URI_PORT}`;
-            mongoDatabaseUri += `/${process.env.MONGODB_URI_DATABASE}`;
+            mongoDbUri += server;
+            mongoDbUri += `:${process.env.MONGODB_URI_PORT}`;
+            mongoDbUri += `/${process.env.MONGODB_URI_DATABASE}`;
         } else {
             return "mongodb://127.0.0.1:27017";
         }
         
-        return mongoDatabaseUri;
+        return mongoDbUri;
     }
 }
 
