@@ -11,7 +11,7 @@ import {
 } from "mongodb";
 import thunkyp from "thunky/promise";
 
-interface KeyvMongoOptions {
+interface KeyvMongoNativeOptions {
   collection?: string;
   dbName?: string;
   ttl?: number;
@@ -20,14 +20,14 @@ interface KeyvMongoOptions {
   mongoClientOptions?: MongoClientOptions;
 }
 
-class KeyvMongo extends EventEmitter {
+class KeyvMongoNative extends EventEmitter {
   collectionThunk: any;
 
   namespace: string;
 
-  options: KeyvMongoOptions;
+  options: KeyvMongoNativeOptions;
 
-  constructor(uri: string, options: KeyvMongoOptions) {
+  constructor(uri: string, options: KeyvMongoNativeOptions) {
     super();
 
     this.options = {
@@ -122,4 +122,4 @@ class KeyvMongo extends EventEmitter {
   };
 }
 
-export { KeyvMongo as default };
+export { KeyvMongoNative as default };

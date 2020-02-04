@@ -1,7 +1,7 @@
 {
-  "name": "keyv-mongo",
+  "name": "keyv-mongo-native",
   "version": "1.0.0",
-  "description": "MongoDB storage adapter for Keyv (MongoDB Node.js driver)",
+  "description": "MongoDB Native storage adapter for Keyv",
   "main": "dist/app.js",
   "directories": {
     "tests": "tests"
@@ -66,14 +66,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RatserX/keyv-mongo.git"
+    "url": "git+https://github.com/RatserX/keyv-mongo-native.git"
   },
   "author": "RatserX <12604047+RatserX@users.noreply.github.com> (http://ratserx.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RatserX/keyv-mongo/issues"
+    "url": "https://github.com/RatserX/keyv-mongo-native/issues"
   },
-  "homepage": "https://github.com/RatserX/keyv-mongo#readme",
+  "homepage": "https://github.com/RatserX/keyv-mongo-native#readme",
   "files": [
     "dist/**"
   ],
