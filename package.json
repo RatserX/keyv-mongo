@@ -39,13 +39,13 @@
     "ts-node": "^8.6.2"
   },
   "scripts": {
-    "build": "npm run lint && npm run build-ts",
+    "build": "npm run lint && npm run declaration && npm run build-ts",
     "build-sass": "node-sass src/**/*.scss dist/**/*.css",
     "build-ts": "tsc --project tsconfig.eslint.json",
     "copy-static-assets": "ts-node copyStaticAssets.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "debug": "npm run build && npm run watch-debug",
-    "declaration": "tsc --declaration --declarationDir src/types --declarationMap --emitDeclarationOnly --project tsconfig.eslint.json",
+    "declaration": "tsc --declaration --declarationDir lib --declarationMap --emitDeclarationOnly --project tsconfig.eslint.json",
     "lint": "tsc --noEmit && eslint --fix --quiet \"**/*.{ts,tsx}\"",
     "prepack": "npm run build",
     "prepublishOnly": "npm test",
@@ -75,7 +75,8 @@
   },
   "homepage": "https://github.com/RatserX/keyv-mongo-native#readme",
   "files": [
-    "dist/**"
+    "dist/**",
+    "lib/**"
   ],
   "keywords": [
     "adapter",
@@ -89,5 +90,5 @@
     "ttl",
     "value"
   ],
-  "types": "src/types/*"
+  "types": "lib/app.d.ts"
 }
