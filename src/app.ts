@@ -27,7 +27,7 @@ class KeyvMongoNative extends EventEmitter {
 
   options: KeyvMongoNativeOptions;
 
-  constructor(uri: string, options: KeyvMongoNativeOptions) {
+  constructor(uri: string, options: KeyvMongoNativeOptions = {}) {
     super();
 
     this.options = {
@@ -70,9 +70,9 @@ class KeyvMongoNative extends EventEmitter {
     });
   }
 
-  clear = async (): Promise<DeleteWriteOpResultObject> => {
+  clear = async (): Promise<undefined> => {
     const collection: Collection<any> = await this.collectionThunk();
-    const promise: Promise<DeleteWriteOpResultObject> = collection
+    const promise: Promise<undefined> = collection
       .deleteMany({
         key: new RegExp(`^${this.namespace}:`)
       })

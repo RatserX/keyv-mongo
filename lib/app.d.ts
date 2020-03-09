@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
-import { DbCollectionOptions, DeleteWriteOpResultObject, MongoClientCommonOption, MongoClientOptions, UpdateWriteOpResult } from "mongodb";
+import { DbCollectionOptions, MongoClientCommonOption, MongoClientOptions, UpdateWriteOpResult } from "mongodb";
 interface KeyvMongoNativeOptions {
     collection?: string;
     dbName?: string;
@@ -13,8 +13,8 @@ declare class KeyvMongoNative extends EventEmitter {
     collectionThunk: any;
     namespace: string;
     options: KeyvMongoNativeOptions;
-    constructor(uri: string, options: KeyvMongoNativeOptions);
-    clear: () => Promise<DeleteWriteOpResultObject>;
+    constructor(uri: string, options?: KeyvMongoNativeOptions);
+    clear: () => Promise<undefined>;
     delete: (key: any) => Promise<boolean>;
     get: (key: any) => Promise<any>;
     set: (key: any, value: any, ttl: number) => Promise<UpdateWriteOpResult>;
