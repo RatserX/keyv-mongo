@@ -3,13 +3,13 @@ export default () => {
         files: [
             "tests/*.ava.*"
         ],
+        require: [
+            "ts-node/register"
+        ],
         typescript: {
             rewritePaths: {
                 "src/": "dist/"
             }
-        },
-        require: [
-            "ts-node/register"
-		]
+        }
     };
 };
