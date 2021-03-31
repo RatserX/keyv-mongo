@@ -7,7 +7,7 @@
     "tests": "tests"
   },
   "dependencies": {
-    "@types/eslint": "^6.1.7",
+    "@types/eslint": "^7.2.8",
     "@types/mongodb": "^3.3.15",
     "dotenv": "^8.2.0",
     "mongodb": "^3.5.0",
